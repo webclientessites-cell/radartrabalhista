@@ -1,8 +1,67 @@
-import React from 'react';
-import { Scale, Mail, Phone, MapPin } from 'lucide-react';
+import React, { useState } from 'react';
+import { Scale, Mail, Phone, MapPin, X } from 'lucide-react';
 import './Footer.css';
 
+const modalData = {
+  rescisao_indireta: {
+    title: "Rescisão Indireta",
+    content: "A rescisão indireta é como se o funcionário desse uma 'justa causa' na empresa por descumprimento do contrato (ex: atraso de salários, assédio, ausência de FGTS). Você sai da empresa com TODOS os direitos de uma demissão sem justa causa."
+  },
+  horas_extras: {
+    title: "Horas Extras não pagas",
+    content: "O não pagamento de horas extras (inclusive tempo de troca de uniforme, tempo de espera de condução e trabalho em horário de almoço) é uma das maiores violações trabalhistas. Você pode ter direito ao pagamento de todas essas horas com acréscimo de 50% a 100%."
+  },
+  assedio: {
+    title: "Assédio Moral no Trabalho",
+    content: "Humilhações constantes, xingamentos, isolamento, metas inatingíveis ou cobranças abusivas na frente de outros configuram assédio moral. O trabalhador pode pedir indenização por danos morais e rescisão indireta."
+  },
+  doencas: {
+    title: "Doenças Ocupacionais",
+    content: "Se você adquiriu uma doença (física ou psicológica, como burnout e depressão) por causa das condições do seu trabalho, a empresa pode ser responsabilizada. Você pode ter direito a estabilidade, indenização e afastamento pago."
+  },
+  justa_causa: {
+    title: "Reversão de Justa Causa",
+    content: "Muitas empresas aplicam a justa causa de forma injusta ou exagerada apenas para não pagar as verbas rescisórias. É possível reverter isso na Justiça e receber todo o acerto (FGTS, aviso prévio, seguro-desemprego)."
+  },
+  direitos_demissao: {
+    title: "Fui demitido, quais meus direitos?",
+    content: "Na demissão sem justa causa, você deve receber: Saldo de salário, Aviso Prévio (trabalhado ou indenizado), 13º proporcional, Férias vencidas e proporcionais + 1/3, saque do FGTS com multa de 40% e guias do Seguro-Desemprego."
+  },
+  calcular_rescisao: {
+    title: "Como calcular a rescisão?",
+    content: "O cálculo exato depende do tempo de serviço, salário base, médias de comissões e horas extras. Muitas empresas 'esquecem' de incluir esses adicionais no cálculo. Uma análise profissional pode identificar se você recebeu menos do que deveria."
+  },
+  insalubridade: {
+    title: "O que é adicional de insalubridade?",
+    content: "É um valor extra (10%, 20% ou 40% do salário mínimo) pago a quem trabalha exposto a agentes nocivos à saúde, como ruído excessivo, calor extremo, produtos químicos, limpeza de banheiros públicos ou agentes biológicos (hospitais)."
+  },
+  fgts_atrasado: {
+    title: "FGTS atrasado, o que fazer?",
+    content: "A empresa é obrigada a depositar 8% do seu salário todos os meses na sua conta do FGTS. Se houver atrasos constantes ou falta de depósito, você pode pedir a Rescisão Indireta do contrato de trabalho imediatamente."
+  },
+  sem_carteira: {
+    title: "Trabalho sem carteira assinada",
+    content: "Trabalhar sem registro não tira seus direitos! Se você cumpre horário, tem chefe, não pode mandar outra pessoa no seu lugar e recebe salário, você tem o direito de ter a carteira assinada retroativamente e receber todo o FGTS, férias e 13º do período."
+  }
+};
+
 const Footer = () => {
+  const [activeModal, setActiveModal] = useState(null);
+
+  const openModal = (e, key) => {
+    e.preventDefault();
+    setActiveModal(key);
+  };
+
+  const closeModal = () => {
+    setActiveModal(null);
+  };
+
+  const scrollToTop = () => {
+    closeModal();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <footer id="contato" className="footer">
       <div className="container">
@@ -22,22 +81,22 @@ const Footer = () => {
           <div className="footer-col">
             <h4 className="footer-heading">Áreas de Atuação</h4>
             <ul className="footer-links">
-              <li><a href="#">Rescisão Indireta</a></li>
-              <li><a href="#">Horas Extras não pagas</a></li>
-              <li><a href="#">Assédio Moral no Trabalho</a></li>
-              <li><a href="#">Doenças Ocupacionais</a></li>
-              <li><a href="#">Reversão de Justa Causa</a></li>
+              <li><a href="#" onClick={(e) => openModal(e, 'rescisao_indireta')}>Rescisão Indireta</a></li>
+              <li><a href="#" onClick={(e) => openModal(e, 'horas_extras')}>Horas Extras não pagas</a></li>
+              <li><a href="#" onClick={(e) => openModal(e, 'assedio')}>Assédio Moral no Trabalho</a></li>
+              <li><a href="#" onClick={(e) => openModal(e, 'doencas')}>Doenças Ocupacionais</a></li>
+              <li><a href="#" onClick={(e) => openModal(e, 'justa_causa')}>Reversão de Justa Causa</a></li>
             </ul>
           </div>
           
           <div className="footer-col">
             <h4 className="footer-heading">Dúvidas Frequentes</h4>
             <ul className="footer-links">
-              <li><a href="#">Fui demitido, quais meus direitos?</a></li>
-              <li><a href="#">Como calcular a rescisão?</a></li>
-              <li><a href="#">O que é adicional de insalubridade?</a></li>
-              <li><a href="#">FGTS atrasado, o que fazer?</a></li>
-              <li><a href="#">Trabalho sem carteira assinada</a></li>
+              <li><a href="#" onClick={(e) => openModal(e, 'direitos_demissao')}>Fui demitido, quais meus direitos?</a></li>
+              <li><a href="#" onClick={(e) => openModal(e, 'calcular_rescisao')}>Como calcular a rescisão?</a></li>
+              <li><a href="#" onClick={(e) => openModal(e, 'insalubridade')}>O que é adicional de insalubridade?</a></li>
+              <li><a href="#" onClick={(e) => openModal(e, 'fgts_atrasado')}>FGTS atrasado, o que fazer?</a></li>
+              <li><a href="#" onClick={(e) => openModal(e, 'sem_carteira')}>Trabalho sem carteira assinada</a></li>
             </ul>
           </div>
           
@@ -79,6 +138,21 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
+      {activeModal && (
+        <div className="footer-modal-overlay" onClick={closeModal}>
+          <div className="footer-modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="footer-modal-close" onClick={closeModal}>
+              <X size={24} />
+            </button>
+            <h3 className="footer-modal-title">{modalData[activeModal].title}</h3>
+            <p className="footer-modal-body">{modalData[activeModal].content}</p>
+            <button className="footer-modal-btn" onClick={scrollToTop}>
+              Avaliar meu caso gratuitamente
+            </button>
+          </div>
+        </div>
+      )}
     </footer>
   );
 };

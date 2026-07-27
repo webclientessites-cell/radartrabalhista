@@ -1,25 +1,114 @@
+.footer-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 15, 30, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.footer-modal-content {
+  background: #1e253c;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  animation: slideUp 0.3s ease;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.footer-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.footer-modal-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.footer-modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+  padding-right: 24px;
+}
+
+.footer-modal-body {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.footer-modal-btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.footer-modal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Rest of the existing CSS */
 .footer {
-  background: var(--bg-primary);
-  padding: 80px 0 40px;
-  border-top: 1px solid var(--glass-border);
+  background-color: var(--bg-card);
+  padding: 80px 0 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
   margin-top: 80px;
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1.5fr 1.5fr 1.5fr;
+  grid-template-columns: 2fr 1.5fr 1.5fr 2fr;
   gap: 48px;
   margin-bottom: 64px;
 }
 
-.brand-col .footer-desc {
-  color: var(--text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
 .footer-heading {
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   font-weight: 600;
   margin-bottom: 24px;
   color: var(--text-primary);
@@ -27,38 +116,61 @@
 
 .footer-links {
   list-style: none;
-}
-
-.footer-links li {
-  margin-bottom: 12px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .footer-links a {
   color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
   font-size: 0.95rem;
-  transition: var(--transition);
+  cursor: pointer;
 }
 
 .footer-links a:hover {
-  color: var(--accent-gold);
+  color: var(--primary);
   padding-left: 4px;
 }
 
-.contact-col .contact-item {
+.footer-whatsapp-btn {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   gap: 12px;
-  margin-bottom: 16px;
+  background-color: #25D366;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.footer-whatsapp-btn:hover {
+  background-color: #20BA5C;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   color: var(--text-secondary);
+  margin-bottom: 12px;
   font-size: 0.95rem;
 }
 
 .footer-bottom {
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 32px;
-  border-top: 1px solid var(--glass-border);
   color: var(--text-secondary);
   font-size: 0.85rem;
 }
@@ -68,20 +180,26 @@
   gap: 24px;
 }
 
-.legal-links a:hover {
-  color: var(--accent-gold);
+.legal-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-@media (max-width: 992px) {
+.legal-links a:hover {
+  color: var(--text-primary);
+}
+
+@media (max-width: 1024px) {
   .footer-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 40px;
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 640px) {
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
   }
   
   .footer-bottom {
@@ -89,27 +207,4 @@
     gap: 16px;
     text-align: center;
   }
-}
-
-.footer-whatsapp-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background-color: transparent;
-  color: #25D366;
-  border: 1px solid #25D366;
-  padding: 10px 18px;
-  border-radius: var(--radius-md);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.95rem;
-  transition: var(--transition);
-  width: fit-content;
-}
-
-.footer-whatsapp-btn:hover {
-  background-color: rgba(37, 211, 102, 0.1);
-  transform: translateY(-2px);
-  color: #25D366;
 }
